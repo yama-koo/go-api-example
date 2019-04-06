@@ -6,7 +6,7 @@ import (
 
 // UserInteractor struct
 type UserInteractor struct {
-	UserRepository
+	UserRepository UserRepository
 }
 
 // Add func

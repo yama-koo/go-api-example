@@ -13,8 +13,9 @@ type SQLHandler struct {
 }
 
 // NewSQLHandler function
-func NewSQLHandler() *SQLHandler {
-	conn, err := sql.Open("mysql", "root:@tcp(db:3306/sample")
+func NewSQLHandler() database.SQLHandler {
+	// TODO: localhost -> db
+	conn, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/sample")
 	if err != nil {
 		panic(err.Error)
 	}
@@ -71,7 +72,7 @@ type SQLRow struct {
 
 // Scan function
 func (r SQLRow) Scan(dest ...interface{}) error {
-	return r.Rows.Scan(dest)
+	return r.Rows.Scan(dest...)
 }
 
 // Next function

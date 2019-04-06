@@ -51,14 +51,13 @@ func (repo *UserRepository) FindByID(identifier int) (user domain.User, err erro
 }
 
 // FindAll func
-func (repo *UserRepository) FindAll() (user domain.Users, err error) {
-	rows, err := repo.Query("SELECT id, first_name, last+name FROM users")
+func (repo *UserRepository) FindAll() (users domain.Users, err error) {
+	rows, err := repo.Query("SELECT id, first_name, last_name FROM users")
 	defer rows.Close()
 	if err != nil {
 		return
 	}
 
-	var users domain.Users
 	for rows.Next() {
 		var id int
 		var firstName string
@@ -66,6 +65,7 @@ func (repo *UserRepository) FindAll() (user domain.Users, err error) {
 		if err := rows.Scan(&id, &firstName, &lastName); err != nil {
 			continue
 		}
+
 		user := domain.User{
 			ID:        id,
 			FirstName: firstName,
